@@ -51,11 +51,11 @@ month = st.sidebar.selectbox("Mes",nps_df['Month'].unique())
 col1,col2 = st.columns(2)
 col3,col4,col4 = st.columns(3)
 
+
 fig_nps = px.line(nps_df, x="Date", y="NPS", title="NPS Monthly")
 col1.plotly_chart(fig_nps)
 
 contador = pd.DataFrame(df_1['FB_SENTIMENT'].value_counts()).reset_index()
-
 fig_sentiment = px.pie(contador, names="FB_SENTIMENT", values="count", title="NPS Group")
 col2.plotly_chart(fig_sentiment)
 
