@@ -58,3 +58,7 @@ contador = pd.DataFrame(df_1['FB_SENTIMENT'].value_counts()).reset_index()
 
 fig_sentiment = px.pie(contador, names="FB_SENTIMENT", values="count", title="NPS Group")
 col2.plotly_chart(fig_sentiment)
+
+touchpoint = pd.DataFrame(df_1['FB_CHANNEL'].value_counts()).reset_index()
+fig_touch = px.bar(touchpoint, x="FB_CHANNEL", y="count", title="Total touchpoint")
+col3.plotly_chart(fig_touch)
