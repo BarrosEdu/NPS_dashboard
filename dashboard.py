@@ -46,11 +46,13 @@ nps_df['Month'] = nps_df['Date'].dt.month_name()
 month = st.sidebar.selectbox("Mes",nps_df['Month'].unique())
 #nps_df = nps_df[nps_df["Month"] == month]
 
+banner = "Welcome NPS Dashboard"
+banner
 
 #Criando layout
+
 col1,col2 = st.columns(2)
 col3,col4,col4 = st.columns(3)
-
 
 fig_nps = px.line(nps_df, x="Date", y="NPS", title="NPS Monthly")
 col1.plotly_chart(fig_nps)
@@ -62,3 +64,7 @@ col2.plotly_chart(fig_sentiment)
 touchpoint = pd.DataFrame(df_1['FB_CHANNEL'].value_counts()).reset_index()
 fig_touch = px.bar(touchpoint, x="FB_CHANNEL", y="count", title="Total touchpoint")
 col3.plotly_chart(fig_touch)
+
+df_bar = pd.DataFrame(df_1['RATING_NPS'].value_counts()).reset_index()
+fig_rating = px.bar(df_bar, x="RATING_NPS", y="count", title="Rating distribution",color='count')
+col4.plotly_chart(fig_rating)
