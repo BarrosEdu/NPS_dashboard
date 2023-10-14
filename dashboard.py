@@ -8,6 +8,12 @@ import plotly.express as px
 
 st.set_page_config(layout="wide")
 
+st.write("""
+         # Welcome NPS Dashboard!
+         A NPS dashboard built on Python
+         """)
+st.sidebar.header('We are working here')
+
 #Carregando o dataset
 df = pd.read_parquet('input/nps_data_full.parquet',engine='fastparquet')
 
@@ -46,8 +52,8 @@ nps_df['Month'] = nps_df['Date'].dt.month_name()
 month = st.sidebar.selectbox("Mes",nps_df['Month'].unique())
 #nps_df = nps_df[nps_df["Month"] == month]
 
-banner = "Welcome NPS Dashboard"
-banner
+
+
 
 #Criando layout
 
