@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 st.write("""
          # Welcome NPS Dashboard!
-         A NPS dashboard built on Python
+         A Python-built dashboard.
          """)
 st.sidebar.header('We are working here')
 
@@ -74,3 +74,14 @@ col3.plotly_chart(fig_touch,use_container_width=True)
 df_bar = pd.DataFrame(df_1['RATING_NPS'].value_counts()).reset_index()
 fig_rating = px.bar(df_bar, x="RATING_NPS", y="count", title="Rating distribution",color='count')
 col4.plotly_chart(fig_rating,use_container_width=True)
+
+##NPS By Channel
+df_channel = df_1.copy()
+df_channel = df_channel[['RATING_NPS','FB_CHANNEL']]
+touchpoint_nps = df_channel.groupby('FB_CHANNEL')['RATING_NPS'].apply(lambda x: (x >= 9).sum() / len(x) - (x <= 6).sum() / len(x)).reset_index()
+touchpoint_nps.rename(columns={'RATING_NPS': 'NPS'}, inplace=True)
+touchpoint_nps['NPS']= (touchpoint_nps['NPS']*100).round(0)
+
+
+fig_channel = px.bar(touchpoint_nps, x='FB_CHANNEL',y='NPS', title="NPS by Channel",color='FB_CHANNEL',text_auto=True)
+col5.plotly_chart(fig_channel,use_container_width=True)
